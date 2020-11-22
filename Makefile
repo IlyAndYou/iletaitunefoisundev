@@ -11,15 +11,12 @@ tests:
 	${MAKE} prepare-test
 	sh vendor/bin/simple-phpunit
 
-
-.PHONY: analyse
 analyse: 
 	npm audit
 	composer valid
-	php bin/console doctrine:schema:valid --skip-sync --env=test
-	bin/phpcs
+	php bin/console doctrine:schema:valid
+	sh vendor/bin/phpcs
 
-.PHONY: prepare-dev
 prepare-dev:
 	npm install
 	npm run dev
