@@ -1,21 +1,22 @@
 build:
 	$(MAKE) prepare-test
-	$(MAKE) analyze
+	$(MAKE) analyse
 	$(MAKE) tests
 
 it:
 	${MAKE} prepare-dev
 	${MAKE} analyse
 
+.PHONY: tests
 tests:
-	${MAKE} prepare-test
-	sh vendor/bin/simple-phpunit
+	$(MAKE) prepare-test
+	php bin/phpunit
 
 analyse: 
 	npm audit
 	composer valid
 	php bin/console doctrine:schema:valid
-	sh vendor/bin/phpcs
+	php vendor/bin/phpcs
 
 prepare-dev:
 	npm install
